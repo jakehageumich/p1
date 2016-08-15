@@ -27,7 +27,7 @@ public class MainClass {
 			// Query insert to table product with 4 values
 			String query = "INSERT INTO DIP_GRANT_T VALUES(?, ?, ?, ?)";
 			// Create prepare statement
-			PrepareStatement pstmt = conn.prepareStatement(query);
+			PreparedStatement pstmt = conn.prepareStatement(query);
 			// get list product from file text
 			ArrayList<Product> listProduct = getListProductFromTextFile("D:/jake/docs/firstDay.txt");
 			// insert list to db
