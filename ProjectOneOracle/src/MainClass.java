@@ -21,15 +21,13 @@ public class MainClass {
 
 			String url = "jdbc:oracle:thin:@db-test.p.icpsr.umich.edu:1521:icpsr";
 			String user = "archonnex";
-
+			//user and password are the same value 
 			Connection conn = DriverManager.getConnection(url, user, user);
-
-			//int counter = 138;
 			
 			// Query insert to table product with 4 values
 			String query = "INSERT INTO DIP_GRANT_T VALUES(?, ?, ?, ?)";
 			// Create prepare statement
-			PreparedStatement pstmt = conn.prepareStatement(query);
+			PrepareStatement pstmt = conn.prepareStatement(query);
 			// get list product from file text
 			ArrayList<Product> listProduct = getListProductFromTextFile("D:/jake/docs/firstDay.txt");
 			// insert list to db
@@ -55,14 +53,17 @@ public class MainClass {
 	
 
 		try {
+			//reads input in the form of bytes
 			fis = new FileInputStream(filePath);
+			//converts input bytes to readable characters one-by-one
 			isr = new InputStreamReader(fis);
+			//reads an entire line of input from the stream reader, maximizing read efficiency
 			bReader = new BufferedReader(isr);
 			// String that saves line get from text file
 			String line = null;
 			// Array save product
 			String[] strProduct = null;
-			
+			//generic int for assigning project Id numbers
 			int count = 438;
 			// loop and get all data from text file
 			while (true) {
@@ -73,7 +74,7 @@ public class MainClass {
 					break;
 				} else {
 					strProduct = line.split(",");
-					//intProduct[0] = first;
+					//add new product object to listResult, using substrings to remove quotation marks
 					listResult.add(new Product(++count, strProduct[1].substring(2, strProduct[1].length()-1),
 							strProduct[2].substring(2, strProduct[2].length()-1), strProduct[3].substring(2, strProduct[3].length()-1)));
 				}
